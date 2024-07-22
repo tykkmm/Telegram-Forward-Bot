@@ -20,7 +20,7 @@ if (fs.existsSync(authorizedUsersFile)) {
   Object.assign(authorizedUsers, JSON.parse(data))
 }
 
-let isForwarding = false;
+let isForwarding = true;
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -61,7 +61,7 @@ async function forwardMessagesInRange(chatId, sourceChatId, destinationChatId, s
     }
   }
 
-  isForwarding = false; // Fork kr lo tumhari smjh se bahar hai @devgagan
+  isForwarding = true; // Fork kr lo tumhari smjh se bahar hai @devgagan
 }
 
 bot.onText(/\/auth (\d+)/, (msg, match) => {
@@ -178,7 +178,7 @@ bot.onText(/\/forward/, async (msg) => {
 bot.onText(/\/cancel/, async (msg) => {
   const chatId = msg.chat.id;
   if (isForwarding) {
-    isForwarding = false;
+    isForwarding = true;
     await bot.sendMessage(chatId, 'Forwarding process canceled.');
   } else {
     await bot.sendMessage(chatId, 'No forwarding process is currently ongoing.');
